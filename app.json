@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Shopping App",
-    "slug": "shoppingapp",
+    "slug": "wtn-wenze",
     "description": "A modern shopping app built with React Native and Expo",
     "version": "1.0.0",
     "jsEngine": "hermes",
@@ -84,7 +84,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "215ebf03-12f3-4ad8-a8b7-9f2340c71c43"
+        "projectId": "f6fa0409-c067-4a37-b08d-0046be8b1a64"
       }
     },
     "runtimeVersion": {
@@ -96,7 +96,7 @@
       "checkAutomatically": "ON_LOAD",
       "enabled": true
     },
-    "owner": "basanth-pedapati",
+    "owner": "ccubenetvix-tech",
     "assetBundlePatterns": [
       "**/*"
     ]
