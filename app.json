@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Shopping App",
-    "slug": "wtn-wenze",
+    "slug": "shoppingapp",
     "description": "A modern shopping app built with React Native and Expo",
     "version": "1.0.0",
     "jsEngine": "hermes",
@@ -84,7 +84,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "f6fa0409-c067-4a37-b08d-0046be8b1a64"
+        "projectId": "6ca402c4-b014-4751-a935-14d3e675d3aa"
       }
     },
     "runtimeVersion": {
