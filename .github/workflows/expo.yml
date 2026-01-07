@@ -1,4 +1,4 @@
-name: Shopping App CI/CD
+name: Wnzee Tii Ndaku CI/CD
 on:
   push:
     branches:

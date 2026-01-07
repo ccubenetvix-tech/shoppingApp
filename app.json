@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "Shopping App",
-    "slug": "shoppingapp",
+    "name": "Wnzee Tii Ndaku",
+    "slug": "wnzee-tii-ndaku",
     "description": "A modern shopping app built with React Native and Expo",
     "version": "1.0.0",
     "jsEngine": "hermes",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "shoppingapp",
+    "scheme": "wnzee-tii-ndaku",
     "userInterfaceStyle": "automatic",
     "primaryColor": "#007AFF",
     "backgroundColor": "#ffffff",
@@ -17,21 +17,28 @@
       "android",
       "web"
     ],
-    "githubUrl": "https://github.com/basanth-pedapati/shoppingapp",
+    "githubUrl": "https://github.com/basanth-pedapati/wnzee-tii-ndaku",
     "ios": {
-      "bundleIdentifier": "com.basanthpedapati.shoppingapp",
+      "bundleIdentifier": "com.ccubenetvix-tech.wnzee-tii-ndaku",
       "supportsTablet": true,
       "buildNumber": "1",
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true,
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCameraUsageDescription": "This app requires camera access to scan QR codes and take product photos.",
+        "NSPhotoLibraryUsageDescription": "This app requires photo library access to upload product images.",
+        "NSLocationWhenInUseUsageDescription": "This app requires location access to show nearby stores and delivery tracking."
       },
       "config": {
         "usesNonExemptEncryption": false
+      },
+      "associatedDomains": ["applinks:wnzee-tii-ndaku.com"],
+      "entitlements": {
+        "com.apple.developer.associated-domains": ["applinks:wnzee-tii-ndaku.com"]
       }
     },
     "android": {
-      "package": "com.basanthpedapati.shoppingapp",
+      "package": "com.ccubenetvix_tech.wnzee_tii_ndaku",
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
@@ -43,15 +50,40 @@
       "buildToolsVersion": "34.0.0",
       "permissions": [
         "android.permission.INTERNET",
-        "android.permission.SYSTEM_ALERT_WINDOW"
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ],
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "wnzee-tii-ndaku.com",
+              "pathPrefix": "/"
+            },
+            {
+              "scheme": "wnzee-tii-ndaku"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
       ]
     },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png",
-      "name": "Shopping App",
-      "shortName": "ShopApp",
+      "name": "Wnzee Tii Ndaku",
+      "shortName": "WnzeeTii",
       "lang": "en",
       "scope": "/",
       "themeColor": "#007AFF",
@@ -87,9 +119,7 @@
         "projectId": "6ca402c4-b014-4751-a935-14d3e675d3aa"
       }
     },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
+    "runtimeVersion": "1.0.0",
     "updates": {
       "url": "https://u.expo.dev/215ebf03-12f3-4ad8-a8b7-9f2340c71c43",
       "fallbackToCacheTimeout": 0,

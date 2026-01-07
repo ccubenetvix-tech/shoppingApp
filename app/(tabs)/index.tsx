@@ -89,7 +89,6 @@ export default function HomeScreen() {
           style={[styles.addToCartButton, { backgroundColor: colors.primary }]}
           onPress={(e) => {
             e.stopPropagation();
-            console.log('Added to cart:', item.name);
           }}
         >
           <Ionicons name="add" size={16} color="#fff" />

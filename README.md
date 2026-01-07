@@ -1,63 +1,45 @@
-# Sweet Shop - React Native Shopping App 🛍️
+# Wnzee Tii Ndaku 🛒
 
-A comprehensive e-commerce mobile application built with React Native, Expo, and TypeScript. This app provides a complete shopping experience with features like product browsing, cart management, favorites, user authentication, and multi-language support.
+A modern React Native shopping application built with Expo, featuring email/password authentication and Google OAuth integration.
 
 ## 🚀 Features
 
-### Core Features
-- **User Authentication**: Login/Register with email and password
-- **Product Catalog**: Browse products by categories with search and filter options
-- **Shopping Cart**: Add, remove, and manage items in cart
-- **Favorites**: Save favorite products for later
-- **Product Details**: Detailed product information with reviews and ratings
-- **Checkout Process**: Complete order placement with payment options
-- **User Profile**: Manage personal information and preferences
+- **Authentication**
+  - Email/Password login and registration
+  - Google OAuth integration
+  - Secure token storage
+  - Auto-login on app restart
 
-### UI/UX Features
-- **Multi-language Support**: English and Afrikaans
-- **Dark/Light Theme**: Automatic theme switching
-- **Responsive Design**: Works on all screen sizes
-- **Smooth Animations**: Enhanced user experience with React Native Reanimated
-- **Modern UI**: Clean and intuitive interface design
+- **Shopping Features**
+  - Browse products by categories
+  - Search functionality
+  - Shopping cart management
+  - Favorites/Wishlist
+  - Product details
+  - Checkout flow
 
-### Technical Features
-- **TypeScript**: Full type safety throughout the app
-- **Context API**: Global state management
-- **File-based Routing**: Using Expo Router
-- **API Integration**: Ready for backend integration
-- **Mock Data**: Development-ready with sample data
+- **Technical Features**
+  - TypeScript for type safety
+  - Centralized API client with timeout handling
+  - Mock API mode for development
+  - Error boundary for crash prevention
+  - Secure storage abstraction (ready for production upgrade)
+  - Environment-based configuration
 
-## 📱 Screenshots
+## 📋 Prerequisites
 
-The app includes the following screens:
-- Onboarding (3 screens with language toggle)
-- Login/Register
-- Home (Featured products, categories, stores)
-- Categories (Expandable category list)
-- Product Details (Images, reviews, related products)
-- Search (Recent and popular searches)
-- Shopping Cart (Item management, order summary)
-- Favorites (Saved products with filters)
-- Profile (User settings and preferences)
-- Checkout (Address, payment, order summary)
+- Node.js (v18 or newer)
+- npm or yarn
+- iOS Simulator (for iOS development on macOS)
+- Android Studio & Android SDK (for Android development)
+- Xcode (for iOS development on macOS)
 
-## 🛠️ Tech Stack
-
-- **Framework**: React Native with Expo
-- **Language**: TypeScript
-- **Navigation**: Expo Router (file-based routing)
-- **State Management**: React Context API + useReducer
-- **Styling**: StyleSheet with responsive design
-- **Icons**: Expo Vector Icons (@expo/vector-icons)
-- **Animations**: React Native Reanimated
-- **Development**: Expo CLI
-
-## 📦 Installation
+## 🛠️ Installation
 
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd shoppingApp
+   cd wnzee-tii-ndaku
    ```
 
 2. **Install dependencies**
@@ -65,197 +47,249 @@ The app includes the following screens:
    npm install
    ```
 
-3. **Start the development server**
+3. **Set up environment variables**
+   
+   Copy the example environment file:
    ```bash
-   npx expo start
+   cp .env.example .env
    ```
 
-4. **Run on device/simulator**
-   - **iOS**: Press `i` to open iOS simulator
-   - **Android**: Press `a` to open Android emulator
-   - **Web**: Press `w` to open in web browser
-   - **Physical Device**: Scan QR code with Expo Go app
+   Edit `.env` and configure your values:
+   ```env
+   EXPO_PUBLIC_API_BASE_URL=https://your-api.com
+   EXPO_PUBLIC_GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
+   EXPO_PUBLIC_USE_MOCK_API=true
+   ```
 
-## 📁 Project Structure
+4. **Configure Google OAuth** (Optional, for production)
 
-```
-shoppingApp/
-├── app/                          # App screens (file-based routing)
-│   ├── (tabs)/                   # Tab navigation screens
-│   │   ├── index.tsx            # Home screen
-│   │   ├── categories.tsx       # Categories screen
-│   │   ├── cart.tsx            # Shopping cart
-│   │   ├── favorites.tsx       # Favorites screen
-│   │   └── profile.tsx         # User profile
-│   ├── _layout.tsx             # Root layout
-│   ├── index.tsx               # App entry point
-│   ├── onboarding.tsx          # Onboarding screens
-│   ├── login.tsx               # Authentication
-│   ├── product-details.tsx     # Product details
-│   ├── search.tsx              # Search functionality
-│   ├── checkout.tsx            # Checkout process
-│   └── +not-found.tsx          # 404 screen
-├── components/                   # Reusable components
-├── constants/                    # App constants (colors, etc.)
-├── contexts/                     # React Context providers
-│   └── AppContext.tsx           # Global app state
-├── hooks/                        # Custom React hooks
-├── services/                     # API services
-│   └── api.ts                   # API integration layer
-├── assets/                       # Images, fonts, etc.
-└── package.json                 # Dependencies and scripts
-```
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a new project or select existing one
+   - Enable Google+ API
+   - Create OAuth 2.0 credentials (Web application)
+   - Add authorized redirect URIs:
+     - `wnzee-tii-ndaku://auth`
+     - `https://auth.expo.io/@your-username/wnzee-tii-ndaku`
+   - Copy the Client ID to your `.env` file
 
-## 🎨 Design System
+5. **Generate native projects**
+   ```bash
+   npm run prebuild
+   ```
 
-### Colors
-- **Primary**: Blue (#2563EB)
-- **Secondary**: Orange (#FB923C)
-- **Success**: Green (#4CAF50)
-- **Error**: Red (#FF4444)
-- **Background**: White/Dark based on theme
-- **Text**: Adaptive based on theme
+## 🏃 Running the App
 
-### Typography
-- **Headers**: Bold, large sizes
-- **Body**: Regular weight, readable sizes
-- **Captions**: Smaller, secondary color
+### Development Mode (Mock API)
 
-### Components
-- **Cards**: Elevated with shadows
-- **Buttons**: Rounded corners, consistent padding
-- **Inputs**: Bordered with focus states
-- **Icons**: Consistent sizing and colors
+```bash
+# Start Expo dev server with mock API
+npm run start:dev
 
-## 🌐 API Integration
+# Run on iOS with mock API
+npm run ios:dev
 
-The app is ready for backend integration with a complete API service layer:
-
-### Available Endpoints
-- Authentication (login, register, logout)
-- Products (list, search, details, featured)
-- Categories (list, products by category)
-- Stores (list, store details, store products)
-- Cart management (add, update, remove, clear)
-- Favorites (add, remove, list)
-- Orders (create, list, details, cancel)
-- User profile (get, update)
-- Search functionality
-
-### Usage Example
-```typescript
-import { apiService } from '@/services/api';
-
-// Get products
-const products = await apiService.getProducts({
-  category: 'groceries',
-  page: 1,
-  limit: 20
-});
-
-// Add to cart
-await apiService.addToCart(userId, productId, quantity);
+# Run on Android with mock API
+npm run android:dev
 ```
 
-## 🔧 Configuration
+### Production Mode (Real API)
+
+```bash
+# Start with real API
+npm run start:prod
+
+# Run on iOS with real API
+npm run ios:prod
+
+# Run on Android with real API
+npm run android:prod
+```
+
+### Standard Expo Commands
+
+```bash
+# Start Expo dev server
+npm start
+
+# Run on iOS
+npm run ios
+
+# Run on Android
+npm run android
+
+# Run on web
+npm run web
+```
+
+## 🏗️ Project Structure
+
+```
+wnzee-tii-ndaku/
+├── app/                    # App screens (expo-router)
+│   ├── (tabs)/            # Tab navigation screens
+│   ├── _layout.tsx        # Root layout with providers
+│   ├── index.tsx          # Entry point (redirect logic)
+│   ├── login.tsx          # Login/Signup screen
+│   ├── onboarding.tsx     # Onboarding screen
+│   └── ...                # Other screens
+├── components/            # Reusable components
+│   ├── ErrorBoundary.tsx  # Error boundary wrapper
+│   ├── ThemedText.tsx     # Themed text component
+│   ├── ThemedView.tsx     # Themed view component
+│   └── ui/                # UI components
+├── config/                # Configuration files
+│   ├── constants.ts       # App constants
+│   └── env.ts             # Environment configuration
+├── constants/             # App-wide constants
+│   └── Colors.ts          # Color scheme
+├── contexts/              # React contexts
+│   └── AppContext.tsx     # Global app state (user, cart, favorites)
+├── hooks/                 # Custom React hooks
+├── lib/                   # Core utilities
+│   ├── api-client.ts      # Centralized API client
+│   └── storage.ts         # Secure storage wrapper
+├── assets/                # Static assets (images, fonts)
+├── .env                   # Environment variables (not committed)
+├── .env.example           # Environment template
+├── app.json               # Expo configuration
+├── package.json           # Dependencies & scripts
+└── tsconfig.json          # TypeScript configuration
+```
+
+## 🔒 Security
 
 ### Environment Variables
-Create a `.env` file in the root directory:
-```
-API_BASE_URL=https://your-api-url.com
-```
 
-### App Configuration
-Update `app.json` for your specific needs:
-- App name and slug
-- Icons and splash screen
-- Build configurations
-- Permissions
+**Never commit `.env` to version control!** It's already in `.gitignore`.
 
-## 🚀 Deployment
+Required environment variables:
+- `EXPO_PUBLIC_API_BASE_URL` - Your backend API URL
+- `EXPO_PUBLIC_GOOGLE_CLIENT_ID` - Google OAuth client ID
+- `EXPO_PUBLIC_USE_MOCK_API` - Use mock API for development (true/false)
 
-### Development Build
+### Storage
+
+Currently using `@react-native-async-storage/async-storage` for simplicity. For production:
+
+1. Install expo-secure-store:
+   ```bash
+   npx expo install expo-secure-store
+   ```
+
+2. Update `lib/storage.ts` to use SecureStore instead of AsyncStorage
+
+3. Rebuild native apps:
+   ```bash
+   npm run prebuild:clean
+   npm run ios  # or android
+   ```
+
+### OAuth Configuration
+
+**Google OAuth Redirect URIs** must be configured in Google Cloud Console:
+
+1. Navigate to APIs & Services → Credentials
+2. Edit your OAuth 2.0 Client ID
+3. Add these Authorized redirect URIs:
+   - `wnzee-tii-ndaku://auth` (for native builds)
+   - `https://auth.expo.io/@your-username/wnzee-tii-ndaku` (for Expo Go)
+
+4. **Important**: Changes take 5-10 minutes to propagate
+
+## 🧪 Development
+
+### Type Checking
+
 ```bash
-npx expo install --fix
-npx expo run:ios
-npx expo run:android
-npx expo run:web
+npm run typecheck
 ```
 
-### Production Build
+### Linting
+
 ```bash
-# Build for iOS
-npx expo build:ios
-
-# Build for Android
-npx expo build:android
-
-# Or use EAS Build (recommended)
-npx eas build --platform all
-```
-
-### Web Deployment
-```bash
-npx expo export:web
-```
-
-## 🧪 Testing
-
-The app includes mock data for development and testing:
-
-### Mock Data Available
-- Products with categories and ratings
-- User profiles and authentication
-- Shopping cart functionality
-- Favorites management
-- Order history
-
-### Running Tests
-```bash
-# Run unit tests (when implemented)
-npm test
-
-# Run linting
 npm run lint
 ```
 
-## 🌍 Internationalization
+### Mock API Mode
 
-The app supports multiple languages:
+The app includes a mock API mode for development without a backend:
 
-### Supported Languages
-- **English (en)**: Default language
-- **Afrikaans (af)**: Secondary language
+- Set `EXPO_PUBLIC_USE_MOCK_API=true` in `.env`
+- Use `npm run start:dev` or `npm run ios:dev`
+- Mock credentials: `test@example.com` / `password123`
 
-### Adding New Languages
-1. Update `translations` object in `contexts/AppContext.tsx`
-2. Add language option in profile settings
-3. Update language toggle in onboarding
+## 📱 Building for Production
 
-### Usage
-```typescript
-import { useApp, translations } from '@/contexts/AppContext';
+### iOS
 
-const { state } = useApp();
-const t = translations[state.language];
+1. Configure signing in Xcode
+2. Update bundle identifier in `app.json`
+3. Build:
+   ```bash
+   npm run ios:prod
+   ```
 
-// Use translations
-<Text>{t.addToCart}</Text>
+For App Store:
+```bash
+eas build --platform ios --profile production
 ```
 
-## 🔒 Security Features
+### Android
 
-- Input validation and sanitization
-- Secure authentication flow
-- Protected routes
-- Safe API communication
-- User data protection
+1. Configure signing in `android/app/build.gradle`
+2. Update package name in `app.json`
+3. Build:
+   ```bash
+   npm run android:prod
+   ```
 
-## 📱 Platform Support
+For Play Store:
+```bash
+eas build --platform android --profile production
+```
 
-- **iOS**: Full support with native features
-- **Android**: Full support with Material Design
-- **Web**: Responsive web version available
+## 🔧 Troubleshooting
+
+### OAuth Issues
+
+**Error 400: redirect_uri_mismatch**
+- Verify redirect URI in Google Cloud Console matches exactly
+- Wait 5-10 minutes after making changes
+- Check that you're using the correct Client ID
+
+**"Something went wrong finishing sign in"**
+- Ensure `WebBrowser.maybeCompleteAuthSession()` is in root layout
+- Verify app scheme in `app.json` matches redirect URI
+- Check native build is up to date: `npm run prebuild:clean`
+
+### Build Issues
+
+**TypeScript errors**
+```bash
+npm run typecheck
+```
+
+**Cache issues**
+```bash
+npx expo start -c
+```
+
+**Native build issues**
+```bash
+npm run prebuild:clean
+cd ios && pod install && cd ..
+npm run ios
+```
+
+## 📚 Tech Stack
+
+- **Framework**: React Native with Expo SDK 54
+- **Navigation**: Expo Router (file-based routing)
+- **Language**: TypeScript
+- **State Management**: React Context API
+- **Authentication**: expo-auth-session (Google OAuth)
+- **Storage**: AsyncStorage (production: SecureStore)
+- **Styling**: StyleSheet API
 
 ## 🤝 Contributing
 
@@ -267,35 +301,15 @@ const t = translations[state.language];
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.
 
 ## 🆘 Support
 
-For support and questions:
-- Create an issue in the repository
-- Check the Expo documentation
-- Visit the React Native community
-
-## 🎯 Roadmap
-
-### Upcoming Features
-- [ ] Push notifications
-- [ ] Social media integration
-- [ ] Advanced search filters
-- [ ] Wishlist sharing
-- [ ] Order tracking
-- [ ] Multiple payment gateways
-- [ ] Offline support
-- [ ] Voice search
-- [ ] AR product preview
-- [ ] Loyalty program
-
-### Performance Improvements
-- [ ] Image optimization
-- [ ] Lazy loading
-- [ ] Caching strategies
-- [ ] Bundle size optimization
+For issues and questions:
+- Check the [Troubleshooting](#-troubleshooting) section
+- Search existing [GitHub Issues](https://github.com/your-repo/issues)
+- Open a new issue with detailed information
 
 ---
 
-**Built with ❤️ using React Native and Expo**
+**Built with ❤️ using Expo and React Native**

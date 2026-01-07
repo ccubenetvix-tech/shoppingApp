@@ -1,5 +1,6 @@
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
@@ -58,17 +59,21 @@ export default function OnboardingScreen() {
 
   const currentData = onboardingData[currentIndex];
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentIndex < onboardingData.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
+      // Mark onboarding as seen
+      await AsyncStorage.setItem('onboardingSeen', 'true');
       // Navigate to login screen
       router.replace('/login');
     }
   };
 
-  const handleSkip = () => {
-  router.replace('/login');
+  const handleSkip = async () => {
+    // Mark onboarding as seen
+    await AsyncStorage.setItem('onboardingSeen', 'true');
+    router.replace('/login');
   };
 
   const toggleLanguage = () => {

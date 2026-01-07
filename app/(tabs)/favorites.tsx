@@ -102,7 +102,6 @@ export default function FavoritesScreen() {
 
   const addToCart = (item: FavoriteItem) => {
     // Add to cart logic here
-    console.log('Added to cart:', item.name);
   };
 
   const filteredFavorites = favorites.filter(item => {

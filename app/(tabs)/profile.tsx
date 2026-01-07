@@ -1,4 +1,5 @@
 import { Colors } from '@/constants/Colors';
+import { useApp } from '@/contexts/AppContext';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
@@ -31,6 +32,7 @@ export default function ProfileScreen() {
   const [locationEnabled, setLocationEnabled] = useState(true);
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
+  const { logout, state } = useApp();
 
   const handleLogout = () => {
     Alert.alert(
@@ -41,7 +43,10 @@ export default function ProfileScreen() {
         { 
           text: 'Logout', 
           style: 'destructive',
-          onPress: () => router.replace('/login')
+          onPress: async () => {
+            await logout();
+            router.replace('/login');
+          }
         }
       ]
     );
@@ -54,7 +59,7 @@ export default function ProfileScreen() {
       subtitle: 'Update your personal information',
       icon: 'person-outline',
       type: 'navigation',
-      onPress: () => console.log('Edit Profile')
+      onPress: () => {}
     },
     {
       id: '2',
@@ -62,7 +67,7 @@ export default function ProfileScreen() {
       subtitle: 'View your past orders',
       icon: 'receipt-outline',
       type: 'navigation',
-      onPress: () => console.log('Order History')
+      onPress: () => {}
     },
     {
       id: '3',
@@ -70,7 +75,7 @@ export default function ProfileScreen() {
       subtitle: 'Manage delivery addresses',
       icon: 'location-outline',
       type: 'navigation',
-      onPress: () => console.log('Addresses')
+      onPress: () => {}
     },
     {
       id: '4',
@@ -78,7 +83,7 @@ export default function ProfileScreen() {
       subtitle: 'Manage cards and payment options',
       icon: 'card-outline',
       type: 'navigation',
-      onPress: () => console.log('Payment Methods')
+      onPress: () => {}
     },
     {
       id: '5',
@@ -104,7 +109,7 @@ export default function ProfileScreen() {
       subtitle: 'English',
       icon: 'language-outline',
       type: 'navigation',
-      onPress: () => console.log('Language')
+      onPress: () => {}
     },
     {
       id: '8',
@@ -112,7 +117,7 @@ export default function ProfileScreen() {
       subtitle: 'Get help and contact us',
       icon: 'help-circle-outline',
       type: 'navigation',
-      onPress: () => console.log('Help & Support')
+      onPress: () => {}
     },
     {
       id: '9',
@@ -120,7 +125,7 @@ export default function ProfileScreen() {
       subtitle: 'Read our privacy policy',
       icon: 'shield-outline',
       type: 'navigation',
-      onPress: () => console.log('Privacy Policy')
+      onPress: () => {}
     },
     {
       id: '10',
@@ -128,7 +133,7 @@ export default function ProfileScreen() {
       subtitle: 'Read our terms of service',
       icon: 'document-text-outline',
       type: 'navigation',
-      onPress: () => console.log('Terms of Service')
+      onPress: () => {}
     },
   ];
 
@@ -181,16 +186,22 @@ export default function ProfileScreen() {
         {/* User Info */}
         <View style={[styles.userInfo, { backgroundColor: colors.cardBackground }]}>
           <View style={[styles.avatar, { backgroundColor: colors.primary }]}>
-            <Text style={styles.avatarText}>JD</Text>
+            <Text style={styles.avatarText}>
+              {state.user?.name ? state.user.name.charAt(0).toUpperCase() : 'U'}
+            </Text>
           </View>
           <View style={styles.userDetails}>
-            <Text style={[styles.userName, { color: colors.text }]}>John Doe</Text>
+            <Text style={[styles.userName, { color: colors.text }]}>
+              {state.user?.name || 'Guest User'}
+            </Text>
             <Text style={[styles.userEmail, { color: colors.textSecondary }]}>
-              john.doe@example.com
+              {state.user?.email || 'Not logged in'}
             </Text>
-            <Text style={[styles.userPhone, { color: colors.textSecondary }]}>
-              +27 123 456 789
-            </Text>
+            {state.user?.phone && (
+              <Text style={[styles.userPhone, { color: colors.textSecondary }]}>
+                {state.user.phone}
+              </Text>
+            )}
           </View>
           <TouchableOpacity style={styles.editButton}>
             <Ionicons name="pencil" size={20} color={colors.primary} />
@@ -204,7 +215,7 @@ export default function ProfileScreen() {
             <Text style={[styles.statLabel, { color: colors.textSecondary }]}>Orders</Text>
           </View>
           <View style={[styles.statItem, { backgroundColor: colors.cardBackground }]}>
-            <Text style={[styles.statNumber, { color: colors.primary }]}>12</Text>
+            <Text style={[styles.statNumber, { color: colors.primary }]}>{state.favorites.length}</Text>
             <Text style={[styles.statLabel, { color: colors.textSecondary }]}>Favorites</Text>
           </View>
           <View style={[styles.statItem, { backgroundColor: colors.cardBackground }]}>

@@ -4,7 +4,7 @@
  */
 
 const primaryBlue = '#3B82F6'; // Main blue color
-const primaryOrange = '#FB923C'; // Main orange color
+const primaryOrange = '#212A5E'; // Main orange color
 const tintColorLight = primaryBlue;
 const tintColorDark = '#fff';
 

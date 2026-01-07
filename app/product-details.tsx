@@ -90,7 +90,6 @@ export default function ProductDetailsScreen() {
   };
 
   const addToCart = () => {
-    console.log(`Added ${quantity} ${product.name} to cart`);
     // Add to cart logic here
   };
 

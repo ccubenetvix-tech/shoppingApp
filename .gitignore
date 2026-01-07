@@ -17,6 +17,8 @@ expo-env.d.ts
 *.p12
 *.key
 *.mobileprovision
+ios/
+android/
 
 # Metro
 .metro-health-check*
@@ -30,10 +32,20 @@ yarn-error.*
 .DS_Store
 *.pem
 
-# local env files
-.env*.local
+# Environment variables - NEVER commit these
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+.env.staging
 
 # typescript
 *.tsbuildinfo
 
 app-example
+
+# Documentation (keep .example files but not the actual filled ones)
+*.md
+!README.md
+!CONTRIBUTING.md

@@ -1,13 +1,6 @@
-import React, { createContext, ReactNode, useContext, useReducer } from 'react';
-
-// Types
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  avatar?: string;
-}
+import React, { createContext, ReactNode, useContext, useEffect, useReducer } from 'react';
+import type { User } from '../lib/api-client';
+import { SecureStorage } from '../lib/storage';
 
 interface CartItem {
   id: string;
@@ -168,8 +161,8 @@ interface AppContextType {
   state: AppState;
   dispatch: React.Dispatch<AppAction>;
   // Helper functions
-  login: (user: User) => void;
-  logout: () => void;
+  login: (user: User) => Promise<void>;
+  logout: () => Promise<void>;
   addToCart: (item: Omit<CartItem, 'id'>) => void;
   updateCartItemQuantity: (id: string, quantity: number) => void;
   removeFromCart: (id: string) => void;
@@ -192,15 +185,43 @@ interface AppProviderProps {
 export function AppProvider({ children }: AppProviderProps) {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
+  // Load persisted user data on mount
+  useEffect(() => {
+    const loadUserData = async () => {
+      try {
+        const token = await SecureStorage.getAuthToken();
+        const user = await SecureStorage.getUserData<User>();
+        
+        if (token && user) {
+          dispatch({ type: 'SET_USER', payload: user });
+        }
+      } catch (error) {
+        // Silent fail
+      }
+    };
+    
+    loadUserData();
+  }, []);
+
   // Helper functions
-  const login = (user: User) => {
-    dispatch({ type: 'SET_USER', payload: user });
+  const login = async (user: User) => {
+    try {
+      await SecureStorage.setUserData(user);
+      dispatch({ type: 'SET_USER', payload: user });
+    } catch (error) {
+      throw error;
+    }
   };
 
-  const logout = () => {
-    dispatch({ type: 'SET_USER', payload: null });
-    dispatch({ type: 'CLEAR_CART' });
-    dispatch({ type: 'SET_FAVORITES', payload: [] });
+  const logout = async () => {
+    try {
+      await SecureStorage.clearAuth();
+      dispatch({ type: 'SET_USER', payload: null });
+      dispatch({ type: 'CLEAR_CART' });
+      dispatch({ type: 'SET_FAVORITES', payload: [] });
+    } catch (error) {
+      throw error;
+    }
   };
 
   const addToCart = (item: Omit<CartItem, 'id'>) => {
